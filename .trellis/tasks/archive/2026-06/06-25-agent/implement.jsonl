@@ -1,0 +1,4 @@
+{"file": ".trellis/tasks/06-25-agent/prd.md", "reason": "完整需求、工具列表、验收标准"}
+{"file": "projects/01-simple-agent/README.md", "reason": "项目目标、结构说明、测试用例"}
+{"file": "notes/agent-basics.md", "reason": "Agent 核心概念和循环原理"}
+{"file": "notes/tool-calling.md", "reason": "工具调用机制和实现要点"}
