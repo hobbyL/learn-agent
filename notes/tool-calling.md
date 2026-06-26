@@ -233,5 +233,49 @@ from agent import Agent  # 之后再 import
 
 **结论**：这是 Agent 和普通脚本的根本区别——脚本的流程是人写死的，Agent 的流程是 LLM 当场决定的。
 
-**最后更新**：2026-06-26  
-**来源项目**：01-simple-agent
+### 6. SYSTEM_PROMPT 是 Agent 行为最强的杠杆
+
+**实验**：02 项目里，问"计算 2 的 10 次方"（没有计算器工具），LLM 硬调 `hash_generator`，拿到哈希值后无视结果自己心算出 1024。
+
+**修复**：一行代码逻辑没改，只在 SYSTEM_PROMPT 加了两条规则：
+- 【能力边界】：工具覆盖不了时，绝不硬凑工具
+- 【工具结果必须被使用】：调了工具就必须用其结果
+
+6 个用例全部验证通过。
+
+**结论**：Agent 行为出偏时，优先调 prompt 而非改代码。SYSTEM_PROMPT 的权重远超你的直觉——它是 LLM 行为最强的控制面。但要记住这是概率性护栏，不是 100% 可靠。
+
+**来源项目**：02-tool-calling
+
+### 7. JSON Schema 是通用协议，Pydantic 是 Python 的标准实现
+
+所有 LLM 的工具调用机制（OpenAI、Anthropic、LangChain、CrewAI、LlamaIndex）底层都是 JSON Schema 协议。框架差异只在"怎么生成这份 Schema"：
+
+- 手搓：inspect.signature → 类型映射 → 拼 JSON（理解原理）
+- Pydantic：BaseModel + model_json_schema() 一行搞定（生产选择）
+
+手搓能覆盖 80% 简单场景（str/int/bool/list/Literal），在复杂类型（Union、嵌套对象）和运行时校验上很快到顶。Pydantic 一步到位。
+
+**结论**：先手搓理解协议本身，再用 Pydantic 避免重复造轮子。两步缺一不可——只手搓会在生产中痛苦，只用 Pydantic 会不理解它背后做了什么。
+
+**来源项目**：02-tool-calling
+
+### 8. 运行时参数校验是 Agent 可靠性的关键防线
+
+Schema 里写的 `"enum": ["hex","rgb","hsl"]` 只是"告诉"LLM 约束，LLM 传了枚举外的值照样能到达工具函数。手搓版全靠每个工具内部 `if` 拦截——分散、不统一、容易遗漏。
+
+Pydantic 的 `model_validate()` 提供了统一的自动校验关卡：
+- 枚举非法值 → `literal_error`
+- 缺少必填字段 → `missing`
+- 类型不对 → 自动宽容转换（`"16"` → `16`），转不了才报错
+
+校验失败的错误信息可以直接喂回 LLM（`role="tool"`），让它自我纠正后重试——这就是"参数校验闭环"。
+
+**结论**：Schema 是"建议"，validate 是"强制"。生产级 Agent 两者都需要。
+
+**来源项目**：02-tool-calling
+
+---
+
+**最后更新**：2026-06-27  
+**来源项目**：01-simple-agent, 02-tool-calling
