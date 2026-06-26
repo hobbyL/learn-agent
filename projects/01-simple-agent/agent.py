@@ -116,6 +116,7 @@ def _log(level: str, msg: str) -> None:
 from tools import (
     TOOLS_DEFINITION,
     calculator,
+    date_calculator,
     get_current_time,
     get_weather,
     text_stats,
@@ -147,12 +148,14 @@ class Agent:
 3. **unit_converter** — 单位换算（温度：摄氏/华氏/开尔文；长度：米/千米/英里等）
 4. **text_stats** — 统计文本信息（字符数、单词数、中文字符数等）
 5. **get_weather** — 查询指定城市的实时天气（需要 OpenWeatherMap API Key）
+6. **date_calculator** — 计算 N 天前/后的日期和星期（昨天、明天、后天、下周X等）
 
 使用工具的原则：
 - 当用户询问需要计算、查询或换算的问题时，主动调用相关工具获取准确结果。
 - 不要猜测计算结果，应使用 calculator 工具确保精确性。
 - 查询天气时，城市名称尽量使用英文以提高准确率。
 - 获取工具结果后，用自然语言向用户清晰解释结果。
+- 询问昨天/明天/后天/前天/N天后等相对日期时，使用 date_calculator 工具，不要自行推算。
 
 回答风格：
 - 简洁、友好、准确。
@@ -270,6 +273,7 @@ class Agent:
         # 如果工具增多，也可以用字典+注册机制来代替 if-elif 链
         tool_map = {
             "calculator":       calculator,
+            "date_calculator":  date_calculator,
             "get_current_time": get_current_time,
             "unit_converter":   unit_converter,
             "text_stats":       text_stats,
