@@ -216,3 +216,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# AI / 工具配置目录（本地工作流，不提交到 git）
+.trellis/
+.claude/
+.codex/
+.agents/
+AGENTS.md
