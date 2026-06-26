@@ -106,20 +106,81 @@ tool_map = {"calculator": calculator, ...}
 
 ---
 
-## 📦 项目结构（规划）
+## 📦 项目结构
 
 ```
 02-tool-calling/
 ├── README.md          # 本文件
-├── main.py            # 命令行入口（可复用 01 的交互框架）
+├── main.py            # 命令行入口（从 01 改：工具清单/示例已更新）
 ├── agent.py           # Agent 循环（从 01 改：dispatch 改为查注册表）
-├── registry.py        # 🆕 @tool 装饰器 + 工具注册表
-├── schema_gen.py      # 🆕 手搓的 Schema 生成器（路线 A 上半场，对照用）
-├── tools.py           # 🆕 8 个新工具（用 Pydantic 参数模型）
+├── registry.py        # 🆕 @tool 装饰器 + 工具注册表（定义即注册）
+├── schema_gen.py      # 🆕 手搓的 Schema 生成器（路线 A 上半场，靠类型注解生成）
+├── tools.py           # 🆕 8 个新工具（当前为手搓类型注解版）
 ├── notes.md           # 学习笔记
-├── requirements.txt   # 依赖（新增 pydantic）
+├── requirements.txt   # 依赖
 ├── .env.example       # 环境变量示例（无需 OpenWeatherMap）
 └── .env               # 真实配置（不提交）
+```
+
+> 当前 `tools.py` 用纯类型注解（含 `Literal` 枚举）配合手搓 `schema_gen.py` 生成 Schema，
+> 属于路线 A「上半场」。Pydantic「下半场」（自动校验）作为后续步骤再引入，
+> 届时会更新本结构说明。
+
+---
+
+## 🚀 快速启动
+
+```bash
+# 1. 进入项目目录
+cd projects/02-tool-calling
+
+# 2. 准备虚拟环境（二选一）
+#    方式 A：复用 01 已建好的环境（本项目依赖与 01 基本一致）
+source ../01-simple-agent/.venv/bin/activate
+#    方式 B：本项目单独建环境（使用 uv）
+# uv venv
+# source .venv/bin/activate          # macOS / Linux
+# # .venv\Scripts\activate           # Windows
+# uv pip install -r requirements.txt
+
+# 3. 配置环境变量
+cp .env.example .env
+# 编辑 .env，填入以下内容：
+# OPENAI_API_KEY=sk-xxxxxxxx
+# OPENAI_BASE_URL=https://...   （如使用代理，否则保留默认）
+# MODEL_NAME=gpt-4o-mini        （可选，默认 gpt-4o-mini）
+# LOG_LEVEL=INFO                （DEBUG 可看到工具调用全过程）
+
+# 4. 启动
+python main.py
+```
+
+> 注意：02 的 8 个工具全部是**本地计算**（密码、骰子、进制、哈希等），
+> 不依赖任何外部 API，所以**不需要** OpenWeatherMap 之类的 Key，只需 OpenAI Key。
+
+### 日志调试
+
+通过 `LOG_LEVEL` 控制输出详细程度：
+
+```bash
+# 默认：只显示关键步骤（第几轮推理、调用了哪个工具）
+LOG_LEVEL=INFO python main.py
+
+# 调试模式：额外显示工具参数、执行结果等所有细节
+LOG_LEVEL=DEBUG python main.py
+
+# 静默模式：只显示最终回答
+LOG_LEVEL=OFF python main.py
+```
+
+### 不启动 Agent，只验证工具系统（无需 OpenAI Key）
+
+注册表和 Schema 生成是纯本地逻辑，可以脱离 LLM 单独验证：
+
+```bash
+# 查看 8 个工具是否都自动注册、Schema 是否正确生成
+python -c "import tools; from registry import registry; \
+print('已注册工具：', registry.list_names())"
 ```
 
 ---
