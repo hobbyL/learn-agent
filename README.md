@@ -8,7 +8,8 @@
 
 **状态**：阶段 1 进行中  
 **已完成**：`01-simple-agent` ✅  
-**下一步**：开始项目 `02-tool-calling`
+**进行中**：`02-tool-calling` 🚧（注册表 + 手搓 Schema 已完成，待引入 Pydantic）  
+**下一步**：02 路线 A 下半场 —— 引入 Pydantic，对比手搓版 + 运行时参数校验
 
 ---
 
@@ -34,7 +35,7 @@
 | 编号 | 项目名称 | 描述 | 状态 | 完成时间 |
 |------|---------|------|------|---------|
 | 01 | [simple-agent](./projects/01-simple-agent/) | 手写最简 Agent，OpenAI Function Calling | ✅ 完成 | 2026-06-26 |
-| 02 | tool-calling | 实现更复杂的工具系统 | ⏳ 未开始 | — |
+| 02 | [tool-calling](./projects/02-tool-calling/) | 工具系统架构：注册表 + 自动 Schema + 校验 | 🚧 进行中 | — |
 | 03 | react-agent | 实现 ReAct 模式（推理+行动） | ⏳ 未开始 | — |
 | 04 | agent-reflection | 自我反思的 Agent | ⏳ 未开始 | — |
 
