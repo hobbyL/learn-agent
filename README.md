@@ -34,7 +34,7 @@
 | 编号 | 项目名称 | 描述 | 状态 | 完成时间 |
 |------|---------|------|------|---------|
 | 01 | [simple-agent](./projects/01-simple-agent/) | 手写最简 Agent，OpenAI Function Calling | ✅ 完成 | 2026-06-26 |
-| 02 | [tool-calling](./projects/02-tool-calling/) | 工具系统架构：注册表 + 自动 Schema + 校验 | ✅ 完成 | 2026-06-26 |
+| 02 | [tool-calling](./projects/02-tool-calling/) | 工具系统架构：注册表 + 自动 Schema + 校验 | ✅ 完成 | 2026-06-27 |
 | 03 | react-agent | 实现 ReAct 模式（推理+行动） | ⏳ 未开始 | — |
 | 04 | agent-reflection | 自我反思的 Agent | ⏳ 未开始 | — |
 
@@ -108,11 +108,11 @@
 |------|--------|------|
 | 2026-06-25 | 🚀 启动学习计划 | 创建学习结构，规划路径 |
 | 2026-06-26 | ✅ 完成项目 01 | simple-agent，5工具全部验证通过 |
-| 2026-06-26 | ✅ 完成项目 02 | tool-calling，注册表+手搓Schema+Pydantic校验+配置切换 |
+| 2026-06-27 | ✅ 完成项目 02 | tool-calling，注册表+手搓Schema+Pydantic校验+配置切换 |
 | 待定 | 🎓 完成阶段 1 | 掌握 Agent 核心原理 |
 | 待定 | 🏗️ 完成阶段 2 | 构建 Agent 系统架构 |
 | 待定 | 🤝 完成阶段 3 | 实现多 Agent 协作 |
 
 ---
 
-**最后更新**：2026-06-26
+**最后更新**：2026-06-27
