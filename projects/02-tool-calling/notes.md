@@ -73,7 +73,66 @@
 
 ## 手搓 Schema vs Pydantic 对比
 
-> 这是 02 的核心收获，专门留一节。等两条路线都走完后，
-> 在这里对比：手写反射版遇到了哪些麻烦，Pydantic 分别是怎么解决的。
+> 两条路线都已走完，以下是实际体会总结。
 
-（待补充——下半场引入 Pydantic 后填写）
+### 代码量对比
+
+| 维度 | 手搓版 (schema_gen.py) | Pydantic 版 (schema_gen_pydantic.py) |
+|------|----------------------|--------------------------------------|
+| Schema 生成逻辑 | ~80 行（inspect + 类型映射 + 拼装） | ~30 行（model_json_schema + 清理 title） |
+| 参数描述 | 分散在 @tool(params={...}) 里 | 和类型写在一起 Field(description=...) |
+| 运行时校验 | 无（全靠工具内部 if） | model_validate() 一行 |
+| 错误信息格式化 | 每个工具手写 error 文案 | _format_validation_error() 通用 |
+
+### 手搓版遇到的麻烦 → Pydantic 怎么解决的
+
+1. **类型映射要逐个写**
+   - 手搓：`_annotation_to_schema()` 要 if/elif 判断 str/int/bool/list/Literal 五种
+   - Pydantic：类型系统是它的核心能力，str/int/bool/list/Literal/Optional/Union/嵌套对象 全自动
+
+2. **required 判断逻辑要手写**
+   - 手搓：`if param.default is inspect.Parameter.empty → required`
+   - Pydantic：有默认值的 Field 自动 optional，没有的自动 required
+
+3. **枚举只是"建议"，运行时拦不住**
+   - 手搓：`Literal["hex","rgb","hsl"]` 生成了 `"enum": [...]` 告诉 LLM，但 LLM 传 "yuv" 照样能到达工具函数
+   - Pydantic：`model_validate()` 直接抛 `literal_error`，工具函数根本收不到非法值
+
+4. **类型不宽容**
+   - 手搓：LLM 传 `"16"`（字符串）给 int 参数，Python 函数收到字符串就炸
+   - Pydantic：自动做宽容类型转换（`"16"` → `16`），减少 LLM 格式瑕疵导致的失败
+
+5. **错误信息要自己写**
+   - 手搓：每个校验点要写 `{"error": "length 太短..."}` 人话文案
+   - Pydantic：ValidationError 自带 field + msg + input，一个通用函数格式化所有工具的错误
+
+### 手搓版的价值（不是白走的弯路）
+
+- 你亲眼看到"从签名生成 Schema"的完整链路：`inspect → 类型判断 → properties + required 拼装`
+- 你理解了 JSON Schema 的结构不是魔法，就是 `{"type":"object","properties":{...},"required":[...]}`
+- 你体会到"手搓能覆盖 80% 简单场景，但在复杂类型和运行时校验上很快到顶"
+- 这些理解让你用 Pydantic 时不是"黑盒调 API"，而是知道它背后替你做了什么
+
+### SCHEMA_ENGINE 配置切换
+
+最终实现了"一行配置切两条完整路线"：
+
+```bash
+# .env 加一行
+SCHEMA_ENGINE=handcraft   # 或 pydantic
+```
+
+| 阶段 | handcraft 模式 | pydantic 模式 |
+|------|---------------|---------------|
+| Schema 生成 | `@tool` → `build_schema()`（inspect 读签名） | `@tool(model=XxxParams)` → `build_schema_pydantic()`（model_json_schema） |
+| 参数校验 | 无（靠工具内部 if） | `validate_tool_args()` 自动拦截 |
+| 类型转换 | 无（字符串"16"会炸） | Pydantic 宽容转换（"16"→16） |
+
+验证对比：
+- handcraft 传 `to_format="yuv"` → 悄悄当 hsl 处理（静默错误）
+- pydantic 传 `to_format="yuv"` → 调用前拦截，返回明确错误给 LLM
+
+### 一句话总结
+
+> **JSON Schema 是通用协议，Pydantic 是 Python 生态里生成它 + 强制校验的标准方案。**
+> 手搓帮你理解协议本身，Pydantic 帮你在生产中不重复造轮子。

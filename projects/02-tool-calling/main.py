@@ -70,7 +70,12 @@ def main() -> None:
         sys.exit(1)
 
     log_level = os.environ.get("LOG_LEVEL", "INFO").upper()
-    print(f"[系统] 日志级别：{log_level}  |  使用模型：{agent.model}")
+    engine = os.environ.get("SCHEMA_ENGINE", "handcraft").lower().strip()
+    print(f"[系统] 日志级别：{log_level}  |  模型：{agent.model}  |  引擎：{engine}")
+    if engine == "pydantic":
+        print("[系统] Pydantic 模式：Schema 由 model_json_schema() 生成，参数有运行时校验")
+    else:
+        print("[系统] 手搓模式：Schema 由 inspect 生成，无运行时参数校验")
     print()
 
     print_welcome()

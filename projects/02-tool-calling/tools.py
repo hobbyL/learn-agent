@@ -39,6 +39,16 @@ import string
 from typing import Any, Literal
 
 from registry import tool
+from schema_gen_pydantic import (
+    QrTextEncoderParams,
+    PasswordGeneratorParams,
+    RandomPickerParams,
+    ColorConverterParams,
+    BaseConverterParams,
+    TextCaseConverterParams,
+    DiceRollerParams,
+    HashGeneratorParams,
+)
 
 
 # ============================================================
@@ -51,6 +61,7 @@ from registry import tool
         "text": "要编码的文本内容（建议 20 字以内，过长会被截断）",
         "size": "每个色块用几个字符宽来表示，越大图案越粗，默认 3",
     },
+    model=QrTextEncoderParams,
 )
 def qr_text_encoder(text: str, size: int = 3) -> dict[str, Any]:
     """把文本编码成字符画伪二维码。"""
@@ -92,6 +103,7 @@ def qr_text_encoder(text: str, size: int = 3) -> dict[str, Any]:
         "length": "密码长度（字符个数），建议 8~64",
         "use_symbols": "是否包含特殊符号（如 !@#$%），默认包含",
     },
+    model=PasswordGeneratorParams,
 )
 def password_generator(length: int, use_symbols: bool = True) -> dict[str, Any]:
     """生成随机密码。"""
@@ -124,6 +136,7 @@ def password_generator(length: int, use_symbols: bool = True) -> dict[str, Any]:
         "options": "候选项列表，例如 ['苹果', '香蕉', '橘子']",
         "count": "要抽取的数量，默认 1。不能超过选项总数",
     },
+    model=RandomPickerParams,
 )
 def random_picker(options: list[str], count: int = 1) -> dict[str, Any]:
     """从列表中随机抽取 count 个不重复的元素。"""
@@ -157,6 +170,7 @@ def random_picker(options: list[str], count: int = 1) -> dict[str, Any]:
         "value": "十六进制颜色值，形如 #RRGGBB 或 RRGGBB，例如 #FF8800",
         "to_format": "目标格式：hex（十六进制）、rgb（红绿蓝）、hsl（色相饱和度亮度）",
     },
+    model=ColorConverterParams,
 )
 def color_converter(value: str, to_format: Literal["hex", "rgb", "hsl"]) -> dict[str, Any]:
     """十六进制颜色 -> hex/rgb/hsl。"""
@@ -213,6 +227,7 @@ def color_converter(value: str, to_format: Literal["hex", "rgb", "hsl"]) -> dict
         "from_base": "原始进制（2~36），例如 16 表示十六进制",
         "to_base": "目标进制（2~36），例如 2 表示二进制",
     },
+    model=BaseConverterParams,
 )
 def base_converter(number: str, from_base: int, to_base: int) -> dict[str, Any]:
     """任意进制互转。三个参数都没有默认值 → 全部必填。"""
@@ -266,6 +281,7 @@ def base_converter(number: str, from_base: int, to_base: int) -> dict[str, Any]:
         "mode": "转换模式：upper（全大写）、lower（全小写）、title（每词首字母大写）、"
                 "snake（蛇形 snake_case）、camel（驼峰 camelCase）",
     },
+    model=TextCaseConverterParams,
 )
 def text_case_converter(
     text: str,
@@ -305,6 +321,7 @@ def text_case_converter(
         "sides": "骰子面数，默认 6（即普通六面骰）",
         "times": "投掷次数，默认 1",
     },
+    model=DiceRollerParams,
 )
 def dice_roller(sides: int = 6, times: int = 1) -> dict[str, Any]:
     """掷骰子。两个参数都有默认值 → required 为空，可无参调用。"""
@@ -333,6 +350,7 @@ def dice_roller(sides: int = 6, times: int = 1) -> dict[str, Any]:
         "algorithm": "哈希算法：md5、sha1、sha256",
         "uppercase": "结果是否用大写字母，默认小写",
     },
+    model=HashGeneratorParams,
 )
 def hash_generator(
     text: str,

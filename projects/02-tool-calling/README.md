@@ -75,34 +75,34 @@ tool_map = {"calculator": calculator, ...}
 
 > 学习原则：**先手写理解原理，再用框架**。不要一上来就 Pydantic。
 
-### 第 1 步：工具注册机制
-- ⏳ 设计 `@tool` 装饰器：被装饰的函数自动登记到一个全局注册表
-- ⏳ 注册表能列出所有工具、按名字取函数
-- ⏳ agent 从注册表拿工具，不再硬编码 `tool_map`
+### 第 1 步：工具注册机制 ✅
+- ✅ 设计 `@tool` 装饰器：被装饰的函数自动登记到一个全局注册表
+- ✅ 注册表能列出所有工具、按名字取函数
+- ✅ agent 从注册表拿工具，不再硬编码 `tool_map`
 
-### 第 2 步：手搓 Schema 生成（路线 A 上半场）
-- ⏳ 用 `inspect.signature()` 读函数签名
-- ⏳ 把 `str/int/float/bool` 映射成 JSON Schema 的 `type`
-- ⏳ 处理 `list[str]` → `{"type": "array", "items": {"type": "string"}}`
-- ⏳ 处理默认值 → 区分 required / optional
-- ⏳ **踩坑记录**：枚举怎么办？复杂类型怎么办？哪里开始变得繁琐？（写进 notes.md）
+### 第 2 步：手搓 Schema 生成（路线 A 上半场） ✅
+- ✅ 用 `inspect.signature()` 读函数签名
+- ✅ 把 `str/int/float/bool` 映射成 JSON Schema 的 `type`
+- ✅ 处理 `list[str]` → `{"type": "array", "items": {"type": "string"}}`
+- ✅ 处理默认值 → 区分 required / optional
+- ✅ **踩坑记录**：枚举怎么办？复杂类型怎么办？哪里开始变得繁琐？（已写进 notes.md）
 
-### 第 3 步：换上 Pydantic（路线 A 下半场）
-- ⏳ 为每个工具定义一个 Pydantic 参数模型
-- ⏳ `model.model_json_schema()` 自动出 Schema（对比手搓版有多干净）
-- ⏳ `model.model_validate(args)` 自动校验 LLM 传回的参数
-- ⏳ **对比记录**：Pydantic 帮你省掉了第 2 步的哪些麻烦？（写进 notes.md）
+### 第 3 步：换上 Pydantic（路线 A 下半场） ✅
+- ✅ 为每个工具定义一个 Pydantic 参数模型（8 个 BaseModel）
+- ✅ `model.model_json_schema()` 自动出 Schema（对比手搓版有多干净）
+- ✅ `model.model_validate(args)` 自动校验 LLM 传回的参数
+- ✅ **对比记录**：Pydantic 帮你省掉了第 2 步的哪些麻烦？（已写进 notes.md）
 
-### 第 4 步：参数校验闭环
-- ⏳ LLM 传错参数时，把 Pydantic 的校验错误转成可读信息
-- ⏳ 把错误喂回 LLM（role="tool"），观察它能否自我纠正后重试
-- ⏳ 呼应 01 的教训："error 信息影响 Agent 循环行为"
+### 第 4 步：参数校验闭环 ✅
+- ✅ LLM 传错参数时，把 Pydantic 的校验错误转成可读信息
+- ✅ 把错误喂回 LLM（role="tool"），观察它能否自我纠正后重试
+- ✅ 呼应 01 的教训："error 信息影响 Agent 循环行为"
 
-### 第 5 步：迁移 8 个工具 + 测试
-- ⏳ 用新系统实现 8 个工具（先跑通 1~2 个，再快速铺开）
-- ⏳ 跑通正常用例
-- ⏳ **故意传错参数**用例：看校验如何反馈给 LLM
-- ⏳ 记录学习笔记，提炼通用知识到 `../../notes/`
+### 第 5 步：迁移 8 个工具 + 测试 ✅
+- ✅ 用新系统实现 8 个工具（先跑通 1~2 个，再快速铺开）
+- ✅ 跑通正常用例（6 个真机用例全部通过）
+- ✅ **故意传错参数**用例：枚举非法值、缺少必填字段、类型不对——全部被 Pydantic 拦截并喂回 LLM
+- ✅ 记录学习笔记，提炼"手搓 vs Pydantic"对比到 notes.md
 
 ---
 
@@ -110,21 +110,27 @@ tool_map = {"calculator": calculator, ...}
 
 ```
 02-tool-calling/
-├── README.md          # 本文件
-├── main.py            # 命令行入口（从 01 改：工具清单/示例已更新）
-├── agent.py           # Agent 循环（从 01 改：dispatch 改为查注册表）
-├── registry.py        # 🆕 @tool 装饰器 + 工具注册表（定义即注册）
-├── schema_gen.py      # 🆕 手搓的 Schema 生成器（路线 A 上半场，靠类型注解生成）
-├── tools.py           # 🆕 8 个新工具（当前为手搓类型注解版）
-├── notes.md           # 学习笔记
-├── requirements.txt   # 依赖
-├── .env.example       # 环境变量示例（无需 OpenWeatherMap）
-└── .env               # 真实配置（不提交）
+├── README.md              # 本文件
+├── main.py                # 命令行入口（从 01 改：工具清单/示例已更新）
+├── agent.py               # Agent 循环（dispatch 查注册表 + Pydantic 校验）
+├── registry.py            # @tool 装饰器 + 工具注册表（定义即注册）
+├── schema_gen.py          # 手搓 Schema 生成器（路线 A 上半场，理解原理用）
+├── schema_gen_pydantic.py # 🆕 Pydantic 版（路线 A 下半场，对照 + 运行时校验）
+├── tools.py               # 8 个新工具（纯类型注解，两套 Schema 生成器都能驱动）
+├── notes.md               # 学习笔记
+├── requirements.txt       # 依赖（含 pydantic>=2.0.0）
+├── .env.example           # 环境变量示例（无需 OpenWeatherMap）
+└── .env                   # 真实配置（不提交）
 ```
 
-> 当前 `tools.py` 用纯类型注解（含 `Literal` 枚举）配合手搓 `schema_gen.py` 生成 Schema，
-> 属于路线 A「上半场」。Pydantic「下半场」（自动校验）作为后续步骤再引入，
-> 届时会更新本结构说明。
+> 通过 `.env` 中的 `SCHEMA_ENGINE` 配置切换两条完整路线：
+>
+> | 配置 | Schema 生成 | 参数校验 | 适合 |
+> |------|------------|---------|------|
+> | `handcraft`（默认） | `schema_gen.py`（inspect + 类型映射） | 无（靠工具内部 if） | 理解原理 |
+> | `pydantic` | `schema_gen_pydantic.py`（model_json_schema） | validate_tool_args() 自动拦截 | 学框架做法 |
+>
+> 一行配置切换两个世界，同一套 8 个工具，对比学习更直观。
 
 ---
 
@@ -150,9 +156,13 @@ cp .env.example .env
 # OPENAI_BASE_URL=https://...   （如使用代理，否则保留默认）
 # MODEL_NAME=gpt-4o-mini        （可选，默认 gpt-4o-mini）
 # LOG_LEVEL=INFO                （DEBUG 可看到工具调用全过程）
+# SCHEMA_ENGINE=handcraft       （手搓版，默认；改为 pydantic 切换引擎）
 
-# 4. 启动
+# 4. 启动（默认 handcraft 模式）
 python main.py
+
+# 或切换到 Pydantic 模式体验运行时校验
+SCHEMA_ENGINE=pydantic python main.py
 ```
 
 > 注意：02 的 8 个工具全部是**本地计算**（密码、骰子、进制、哈希等），
@@ -189,12 +199,12 @@ print('已注册工具：', registry.list_names())"
 
 | 标准 | 状态 |
 |------|------|
-| `@tool` 装饰器能自动注册工具，agent 不再硬编码 dispatch | ⏳ |
-| 手搓 Schema 生成器能处理 str/int/bool/list/默认值 | ⏳ |
-| Pydantic 版能自动生成 Schema + 校验参数 | ⏳ |
-| 参数校验错误能喂回 LLM 并触发自我纠正 | ⏳ |
-| 8 个工具全部接入新系统并验证通过 | ⏳ |
-| "故意传错参数"用例展示校验反馈闭环 | ⏳ |
+| `@tool` 装饰器能自动注册工具，agent 不再硬编码 dispatch | ✅ |
+| 手搓 Schema 生成器能处理 str/int/bool/list/默认值 | ✅ |
+| Pydantic 版能自动生成 Schema + 校验参数 | ✅ |
+| 参数校验错误能喂回 LLM 并触发自我纠正 | ✅ 已集成到 agent._dispatch_tool |
+| 8 个工具全部接入新系统并验证通过 | ✅ |
+| "故意传错参数"用例展示校验反馈闭环 | ✅ validate_tool_args 拦截枚举/缺字段/类型 |
 
 ---
 
@@ -207,4 +217,4 @@ print('已注册工具：', registry.list_names())"
 ---
 
 **创建时间**：2026-06-26
-**状态**：⏳ 进行中
+**状态**：✅ 完成

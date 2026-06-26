@@ -66,6 +66,7 @@ def _log(level: str, msg: str) -> None:
 # 这是 02 一个值得记住的细节：注册是「import 时」发生的副作用。
 import tools  # noqa: F401  （仅为触发 @tool 注册，故意不直接使用）
 from registry import registry
+from schema_gen_pydantic import validate_tool_args
 
 
 class Agent:
@@ -126,10 +127,11 @@ class Agent:
         self.client = OpenAI(api_key=api_key, base_url=base_url)
         self.max_iterations = 10
         self.messages: list[dict] = []
+        self._engine = os.environ.get("SCHEMA_ENGINE", "handcraft").lower().strip()
         self._add_system_message()
 
         # 启动时打印一下注册表里有哪些工具，确认注册成功（学习期很有用）
-        _log("INFO", f"已从注册表加载 {len(registry)} 个工具：{registry.list_names()}")
+        _log("INFO", f"[{self._engine} 模式] 已从注册表加载 {len(registry)} 个工具：{registry.list_names()}")
 
     def _add_system_message(self) -> None:
         """把系统提示词加到 messages 开头。"""
@@ -142,29 +144,45 @@ class Agent:
 
     def _dispatch_tool(self, name: str, args: dict) -> str:
         """
-        核心改动：不再硬编码 tool_map，改为向注册表查询函数。
+        根据 SCHEMA_ENGINE 配置走不同的调用路径：
 
-        对比 01：
-            01: func = {"calculator": calculator, ...}.get(name)   # 写死
-            02: func = registry.get_func(name)                      # 查表
+        handcraft 模式：
+            registry.get_func(name) → 直接 func(**args)
+            无预校验，参数合法性全靠工具函数内部 if 拦截
 
-        无论注册了多少工具、叫什么名字，这段代码都不用改——这就是注册表的价值。
+        pydantic 模式：
+            registry.get_func(name) → validate_tool_args(校验) → func(**validated_args)
+            Pydantic 在调用前拦截枚举非法值/缺字段/类型不对，
+            校验失败直接喂回 LLM 让它自我纠正
+
+        两种模式下 registry 查表这一步是一样的——区别只在"调用前是否过一道 Pydantic"。
         """
         func = registry.get_func(name)
 
         if func is None:
-            # 工具不存在。错误信息明确告知 LLM 这是"工具不存在"，不可通过重试解决。
             return json.dumps(
                 {"error": f"未知工具：{name}。该工具不存在，请勿重试此工具。"},
                 ensure_ascii=False,
             )
 
+        # 根据引擎配置决定是否走 Pydantic 校验
+        if self._engine == "pydantic":
+            # ★ Pydantic 参数校验
+            # 在真正调用工具前，先用 Pydantic 模型校验参数合法性。
+            # 好处：枚举非法值、缺少必填字段、类型不对——全部在这里拦住。
+            validation = validate_tool_args(name, args)
+            if not validation["valid"]:
+                _log("WARN", f"参数校验失败：{validation['error']}")
+                return json.dumps({"error": validation["error"]}, ensure_ascii=False)
+            # 校验通过后，用经过类型转换的干净参数（比如字符串 "3" → int 3）
+            call_args = validation["validated_args"]
+        else:
+            # handcraft 模式：原样传参，不做预校验
+            call_args = args
+
         try:
-            # **args 解包为关键字参数调用
-            result = func(**args)
+            result = func(**call_args)
         except TypeError as e:
-            # 参数名/数量不匹配（比如 LLM 漏传了必填参数，或传了多余参数）
-            # 把它转成对 LLM 友好的提示，让它有机会修正参数后重试。
             result = {
                 "error": (
                     f"调用工具 {name} 的参数不正确：{e}。"
@@ -172,7 +190,6 @@ class Agent:
                 )
             }
         except Exception as e:
-            # 兜底：工具内部未预料的异常
             result = {"error": f"工具执行异常：{type(e).__name__}: {e}"}
 
         return json.dumps(result, ensure_ascii=False)
