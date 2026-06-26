@@ -45,9 +45,9 @@
 ## 📝 实现步骤
 
 ### 第 1 步：环境搭建
-- [ ] 创建 Python 虚拟环境
-- [ ] 安装依赖
-- [ ] 配置 API Key（OPENAI_API_KEY、OPENWEATHERMAP_API_KEY）
+- [x] 创建 Python 虚拟环境
+- [x] 安装依赖
+- [x] 配置 API Key（OPENAI_API_KEY、OPENWEATHERMAP_API_KEY）
 
 ### 第 2 步：实现基础 Agent 类
 - [x] 定义 `Agent` 类
@@ -56,13 +56,13 @@
 
 ### 第 3 步：实现工具系统
 - [x] 定义工具接口（JSON Schema）
-- [x] 实现 5 个工具（计算器、时间、单位换算、文本统计、天气）
+- [x] 实现 6 个工具（计算器、时间、日期计算、单位换算、文本统计、天气）
 - [x] 工具注册和调用（_dispatch_tool）
 
 ### 第 4 步：整合和测试
 - [x] 集成 Agent 和工具（main.py）
-- [ ] 运行并测试 5 个测试用例
-- [ ] 记录学习笔记（notes.md）
+- [x] 运行并测试 6 个测试用例
+- [x] 记录学习笔记（notes.md）
 
 ---
 
@@ -73,7 +73,7 @@
 ├── README.md          # 本文件（项目说明、进度追踪）
 ├── main.py            # 命令行交互入口（启动这个文件）
 ├── agent.py           # Agent 核心循环（感知→推理→行动）
-├── tools.py           # 5 个工具函数 + OpenAI Function Calling Schema
+├── tools.py           # 6 个工具函数 + OpenAI Function Calling Schema
 ├── notes.md           # 学习笔记（原始记录）
 ├── requirements.txt   # Python 依赖列表
 ├── .env.example       # 环境变量配置示例
