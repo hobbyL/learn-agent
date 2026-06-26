@@ -45,24 +45,24 @@
 ## 📝 实现步骤
 
 ### 第 1 步：环境搭建
-- [x] 创建 Python 虚拟环境
-- [x] 安装依赖
-- [x] 配置 API Key（OPENAI_API_KEY、OPENWEATHERMAP_API_KEY）
+- ✅ 创建 Python 虚拟环境
+- ✅ 安装依赖
+- ✅ 配置 API Key（OPENAI_API_KEY、OPENWEATHERMAP_API_KEY）
 
 ### 第 2 步：实现基础 Agent 类
-- [x] 定义 `Agent` 类
-- [x] 实现 `run()` 方法（核心循环）
-- [x] 实现 LLM 调用（OpenAI Function Calling）
+- ✅ 定义 `Agent` 类
+- ✅ 实现 `run()` 方法（核心循环）
+- ✅ 实现 LLM 调用（OpenAI Function Calling）
 
 ### 第 3 步：实现工具系统
-- [x] 定义工具接口（JSON Schema）
-- [x] 实现 6 个工具（计算器、时间、日期计算、单位换算、文本统计、天气）
-- [x] 工具注册和调用（_dispatch_tool）
+- ✅ 定义工具接口（JSON Schema）
+- ✅ 实现 6 个工具（计算器、时间、日期计算、单位换算、文本统计、天气）
+- ✅ 工具注册和调用（_dispatch_tool）
 
 ### 第 4 步：整合和测试
-- [x] 集成 Agent 和工具（main.py）
-- [x] 运行并测试 6 个测试用例
-- [x] 记录学习笔记（notes.md）
+- ✅ 集成 Agent 和工具（main.py）
+- ✅ 运行并测试 6 个测试用例
+- ✅ 记录学习笔记（notes.md）
 
 ---
 

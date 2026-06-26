@@ -85,9 +85,9 @@
 
 ## 待提炼到主目录 notes/
 
-- [x] load_dotenv 时序问题 → 提炼到 `notes/tool-calling.md`
-- [x] 工具 description 影响 LLM 行为 → 提炼到 `notes/tool-calling.md`
-- [x] LLM 不擅长精确计数的结论 → 提炼到 `notes/tool-calling.md`（教训 2）
+- ✅ load_dotenv 时序问题 → 提炼到 `notes/tool-calling.md`
+- ✅ 工具 description 影响 LLM 行为 → 提炼到 `notes/tool-calling.md`
+- ✅ LLM 不擅长精确计数的结论 → 提炼到 `notes/tool-calling.md`（教训 2）
 
 ---
 
