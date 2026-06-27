@@ -1,0 +1,5 @@
+# 04-agent-reflection 依赖
+# 和 03 共享虚拟环境，大部分依赖已安装
+
+openai>=1.0.0
+python-dotenv>=1.0.0
