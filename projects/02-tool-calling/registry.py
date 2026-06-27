@@ -62,6 +62,7 @@ class ToolRegistry:
     """
 
     def __init__(self) -> None:
+        """初始化空的注册表。所有 @tool 装饰的函数会在 import 时自动填充到这里。"""
         # 工具名 -> {"func": ..., "schema": ...}
         self._tools: dict[str, dict[str, Any]] = {}
 
@@ -178,6 +179,13 @@ def tool(
     engine = os.environ.get("SCHEMA_ENGINE", "handcraft").lower().strip()
 
     def decorator(func: Callable) -> Callable:
+        """
+        真正的装饰器：读取函数信息，生成 Schema，注册到全局注册表。
+
+        根据 SCHEMA_ENGINE 环境变量决定 Schema 生成路径：
+          - handcraft：inspect 读签名 → build_schema() 手动拼
+          - pydantic：model.model_json_schema() 一行生成
+        """
         # 工具名：优先用显式传入的 name，否则用函数名
         tool_name = name or func.__name__
 

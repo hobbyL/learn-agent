@@ -54,19 +54,29 @@ from pydantic import BaseModel, Field, ValidationError
 
 
 class QrTextEncoderParams(BaseModel):
-    """qr_text_encoder 的参数模型"""
+    """qr_text_encoder 的参数模型 —— 入门基准：str 必填 + int 带默认值（可选）。
+
+    Pydantic 自动识别：有 default 的字段 → 不进 required 列表。
+    """
     text: str = Field(description="要编码的文本内容（建议 20 字以内，过长会被截断）")
     size: int = Field(default=3, description="每个色块用几个字符宽来表示，越大图案越粗，默认 3")
 
 
 class PasswordGeneratorParams(BaseModel):
-    """password_generator 的参数模型"""
+    """password_generator 的参数模型 —— bool 类型 + 默认值。
+
+    Pydantic 对 bool 做宽容转换：LLM 传 "true"/"false" 字符串也能正确解析。
+    """
     length: int = Field(description="密码长度（字符个数），建议 8~64")
     use_symbols: bool = Field(default=True, description="是否包含特殊符号（如 !@#$%），默认包含")
 
 
 class RandomPickerParams(BaseModel):
-    """random_picker 的参数模型"""
+    """random_picker 的参数模型 —— list[str] 数组类型。
+
+    Pydantic 自动生成 {"type": "array", "items": {"type": "string"}}，
+    手搓版要在 _annotation_to_schema 里专门写 list 分支才行。
+    """
     options: list[str] = Field(description="候选项列表，例如 ['苹果', '香蕉', '橘子']")
     count: int = Field(default=1, description="要抽取的数量，默认 1。不能超过选项总数")
 
@@ -80,14 +90,23 @@ class ColorConverterParams(BaseModel):
 
 
 class BaseConverterParams(BaseModel):
-    """base_converter 的参数模型"""
+    """base_converter 的参数模型 —— 三个参数全必填（required 列表最长）。
+
+    全部没有 default → Pydantic 的 required 列表自动包含全部字段。
+    model_validate() 会在缺字段时立刻报 'Field required' 错误。
+    """
     number: str = Field(description="要转换的数字（用字符串表示，例如 'FF'、'1010'、'255'）")
     from_base: int = Field(description="原始进制（2~36），例如 16 表示十六进制")
     to_base: int = Field(description="目标进制（2~36），例如 2 表示二进制")
 
 
 class TextCaseConverterParams(BaseModel):
-    """text_case_converter 的参数模型"""
+    """text_case_converter 的参数模型 —— 5 值密集枚举。
+
+    Literal["upper","lower","title","snake","camel"] → Pydantic 自动生成
+    {"enum": [...], "type": "string"}，且 model_validate 会在运行时
+    拦截枚举外的值（手搓版只能"告诉"LLM，拦不住）。
+    """
     text: str = Field(description="要转换的原始文本")
     mode: Literal["upper", "lower", "title", "snake", "camel"] = Field(
         description="转换模式：upper（全大写）、lower（全小写）、title（首字母大写）、"
