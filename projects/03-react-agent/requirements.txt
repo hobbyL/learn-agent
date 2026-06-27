@@ -1,0 +1,5 @@
+# 03-react-agent 依赖
+# 和 01/02 共享同一个 .venv（在 01-simple-agent 下创建）
+
+openai>=1.0.0
+python-dotenv>=1.0.0
