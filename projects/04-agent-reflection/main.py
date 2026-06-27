@@ -239,11 +239,25 @@ def run_compare():
         # ── 无反思：单轮 ReAct ──
         print(f"\n  {Colors.DIM}▸ 无反思模式（单轮 ReAct）...{Colors.RESET}")
         no_ref_result = react_loop.run(q["question"])
-        no_ref_eval = evaluator.evaluate(
-            question=q["question"],
-            agent_answer=no_ref_result["answer"],
-            ground_truth=q["ground_truth"],
-        )
+
+        # 注意：两种评估器的第三个参数名不同：
+        #   GroundTruthEvaluator.evaluate(question, agent_answer, ground_truth=...)
+        #   LLMJudgeEvaluator.evaluate(question, agent_answer, steps=...)
+        # 用位置参数传递以兼容两者，ground_truth 对 LLMJudgeEvaluator 会被当作 steps
+        # 实际场景：compare 模式默认使用 ground_truth 评估器（EVALUATOR_MODE=ground_truth）
+        from evaluator import GroundTruthEvaluator, LLMJudgeEvaluator
+        if isinstance(evaluator, LLMJudgeEvaluator):
+            no_ref_eval = evaluator.evaluate(
+                question=q["question"],
+                agent_answer=no_ref_result["answer"],
+                steps=no_ref_result.get("steps", []),
+            )
+        else:
+            no_ref_eval = evaluator.evaluate(
+                question=q["question"],
+                agent_answer=no_ref_result["answer"],
+                ground_truth=q["ground_truth"],
+            )
 
         # ── 有反思：Reflexion 多轮 ──
         print(f"  {Colors.DIM}▸ 有反思模式（Reflexion）...{Colors.RESET}")
