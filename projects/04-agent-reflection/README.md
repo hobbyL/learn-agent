@@ -142,6 +142,24 @@ python main.py
 
 ---
 
+## ✅ 完成标准
+
+| 标准 | 状态 |
+|------|------|
+| 外层 Reflexion 循环：trial → evaluate → reflect → retry | ✅ |
+| 内层轻量 ReAct 循环（去掉跳步检测，让错误自然发生） | ✅ |
+| 反思摘要注入 system prompt 尾部（论文标准做法） | ✅ |
+| 双轨评估器：GroundTruth（程序比对）+ LLMJudge（LLM 评估） | ✅ |
+| `EVALUATOR_MODE` 环境变量切换两种评估器 | ✅ |
+| 反思器（Reflector）生成"哪里错→为什么→怎么改"摘要 | ✅ |
+| `--demo` 模式运行预设题展示完整反思循环 | ✅ |
+| `--compare` 模式并排对比"无反思 vs 有反思"效果 | ✅ |
+| max_steps / max_trials 到达时优雅终止 | ✅ |
+| 深海联盟知识库 32 个实体，含陷阱设计（易混淆实体名） | ✅ |
+| 10 道预设测试题，答案路径全部经 `lookup_entity()` 验证可达 | ✅ |
+
+---
+
 ## 设计决策
 
 ### 1. 为什么要内层重写 ReAct 而不复用 03？
