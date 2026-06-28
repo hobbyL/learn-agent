@@ -182,7 +182,7 @@ Reflexion 论文实验表明 2-3 轮反思后改进趋于饱和，
 | `reflector.py` | 反思生成器（LLM 分析错误原因） |
 | `tools.py` | 工具层（search / lookup / calculate / compare） |
 | `knowledge_base.py` | 深海联盟虚构世界知识库 |
-| `test_questions.py` | 预设测试问题 + 标准答案 |
+| `test_questions.py` | 预设测试问题 + 标准答案（10 道，含答案路径验证） |
 
 ---
 
