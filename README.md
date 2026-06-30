@@ -7,20 +7,20 @@
 ## 🔥 当前正在学习
 
 **状态**：阶段 2 进行中  
-**已完成**：`01-simple-agent` ✅ · `02-tool-calling` ✅ · `03-react-agent` ✅ · `04-agent-reflection` ✅ · `05-streaming-agent` ✅ · `06-streaming-react` ✅  
-**下一步**：`07-short-term-memory`（短期记忆：对话历史管理 + context 压缩）
+**已完成**：`01-simple-agent` ✅ · `02-tool-calling` ✅ · `03-react-agent` ✅ · `04-agent-reflection` ✅ · `05-streaming-agent` ✅ · `06-streaming-react` ✅ · `07-short-term-memory` ✅  
+**下一步**：`08-long-term-memory`（长期记忆：向量化存储 + 语义检索 + 跨 session 记忆）
 
 ---
 
 ## 📊 总体进度
 
-**完成项目**：6 / 17  
-**当前阶段**：阶段 2 - Agent 系统设计（2/7 项目已完成）  
+**完成项目**：7 / 17  
+**当前阶段**：阶段 2 - Agent 系统设计（3/7 项目已完成）  
 **开始时间**：2026-06-25
 
 ```
 阶段 1: Agent 核心原理        [██████████] 4/4 项目 ✅
-阶段 2: Agent 系统设计        [██░░░░░░░░] 2/7 项目
+阶段 2: Agent 系统设计        [███░░░░░░░] 3/7 项目
 阶段 3: 多 Agent 系统         [░░░░░░░░░░] 0/4 项目（含 MCP）
 阶段 4: 领域应用与优化        [待规划，阶段 1-3 后细化]
 ```
@@ -44,7 +44,7 @@
 |------|---------|------|------|---------|
 | 05 | [streaming-agent](./projects/05-streaming-agent/) | 流式输出：streaming API + tool_calls delta 拼接 + 双视角展示 | ✅ 完成 | 2026-06-29 |
 | 06 | [streaming-react](./projects/06-streaming-react/) | 流式 ReAct：边流边解析推理链 + 实时 Thought/Action 展示 | ✅ 完成 | 2026-06-30 |
-| 07 | short-term-memory | 短期记忆：对话历史管理 + context 压缩 + 摘要策略 | ⏳ 未开始 | — |
+| 07 | [short-term-memory](./projects/07-short-term-memory/) | 短期记忆：4种策略（滑动窗口/Token截断/LLM摘要）并排对比 | ✅ 完成 | 2026-06-30 |
 | 08 | long-term-memory | 长期记忆：向量化存储 + 语义检索 + 跨 session 记忆 | ⏳ 未开始 | — |
 | 09 | structured-output-and-planning | 结构化输出 + 任务分解与目标树 | ⏳ 未开始 | — |
 | 10 | hitl-agent | Human-in-the-Loop：主动中断 + 人类反馈 + 恢复执行 | ⏳ 未开始 | — |
@@ -118,9 +118,11 @@
 | 2026-06-28 | 🎉 完成阶段 1 | Agent 核心原理（4个项目）全部完成 |
 | 2026-06-29 | ✅ 完成项目 05 | streaming-agent，FC流式+delta拼接+太空站联盟+双视角展示+compare对比 |
 | 2026-06-30 | ✅ 完成项目 06 | streaming-react，流式ReAct+状态机增量解析+实时推理链着色+compare对比 |
+| 2026-06-30 | ✅ 完成项目 07 | short-term-memory，4种记忆策略+星际学院知识库+并排compare对比+tiktoken计数 |
 | 待定 | 🎓 完成阶段 2 | 构建 Agent 系统架构 |
-| 待定 | 🏗️ 完成阶段 3 | 实现多 Agent 协作 |
 
 ---
 
-**最后更新**：2026-06-30（06-streaming-react 完成）
+| 待定 | 🏗️ 完成阶段 3 | 实现多 Agent 协作 |
+
+**最后更新**：2026-06-30（07-short-term-memory 完成）
