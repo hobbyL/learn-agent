@@ -222,4 +222,7 @@ __marimo__/
 .claude/
 .codex/
 .agents/
+
+# ChromaDB 持久化数据（08-long-term-memory）
+projects/08-long-term-memory/chroma_db/
 AGENTS.md
