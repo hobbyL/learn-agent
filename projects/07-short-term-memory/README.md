@@ -197,3 +197,9 @@ tokens = len(encoding.encode(content)) + 4  # +4 = 每条消息 overhead
 Baseline 策略超出上限时，`MemoryAgent.ask()` 捕获 `BadRequestError`，
 检查 `error.code == "context_length_exceeded"`，返回提示字符串而非抛出异常，
 compare 模式继续运行其他策略。
+
+---
+
+**创建时间**：2026-06-30
+**完成时间**：2026-06-30
+**状态**：✅ 已完成
