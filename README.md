@@ -7,20 +7,20 @@
 ## 🔥 当前正在学习
 
 **状态**：阶段 2 进行中  
-**已完成**：`01-simple-agent` ✅ · `02-tool-calling` ✅ · `03-react-agent` ✅ · `04-agent-reflection` ✅ · `05-streaming-agent` ✅ · `06-streaming-react` ✅ · `07-short-term-memory` ✅ · `08-long-term-memory` ✅ · `09-structured-output` ✅  
-**下一步**：`10-planning-and-goal-tree`（任务分解与目标树）
+**已完成**：`01-simple-agent` ✅ · `02-tool-calling` ✅ · `03-react-agent` ✅ · `04-agent-reflection` ✅ · `05-streaming-agent` ✅ · `06-streaming-react` ✅ · `07-short-term-memory` ✅ · `08-long-term-memory` ✅ · `09-structured-output` ✅ · `10-planning-and-goal-tree` ✅  
+**下一步**：`11-hitl-agent`（Human-in-the-Loop）
 
 ---
 
 ## 📊 总体进度
 
-**完成项目**：9 / 18  
-**当前阶段**：阶段 2 - Agent 系统设计（5/8 项目已完成）  
+**完成项目**：10 / 18  
+**当前阶段**：阶段 2 - Agent 系统设计（6/8 项目已完成）  
 **开始时间**：2026-06-25
 
 ```
 阶段 1: Agent 核心原理        [██████████] 4/4 项目 ✅
-阶段 2: Agent 系统设计        [█████░░░░░] 5/8 项目
+阶段 2: Agent 系统设计        [███████░░░] 6/8 项目
 阶段 3: 多 Agent 系统         [░░░░░░░░░░] 0/4 项目（含 MCP）
 阶段 4: 领域应用与优化        [待规划，阶段 1-3 后细化]
 ```
@@ -47,7 +47,7 @@
 | 07 | [short-term-memory](./projects/07-short-term-memory/) | 短期记忆：4种策略（滑动窗口/Token截断/LLM摘要）并排对比 | ✅ 完成 | 2026-06-30 |
 | 08 | [long-term-memory](./projects/08-long-term-memory/) | 长期记忆：ChromaDB向量存储 + 语义检索 + 跨session记忆持久化 | ✅ 完成 | 2026-07-02 |
 | 09 | [structured-output](./projects/09-structured-output/) | 结构化输出：json_schema + Pydantic 校验 + 解析重试 + schema 设计 | ✅ 完成 | 2026-07-02 |
-| 10 | planning-and-goal-tree | 任务分解与目标树：Plan→Execute + 子任务拆解 + 依赖图 + re-planning | ⏳ 未开始 | — |
+| 10 | [planning-and-goal-tree](./projects/10-planning-and-goal-tree/) | 任务分解与目标树：Plan→Execute→Re-plan + DAG 拓扑排序 + 局部重规划 | ✅ 完成 | 2026-07-06 |
 | 11 | hitl-agent | Human-in-the-Loop：主动中断 + 人类反馈 + 恢复执行 | ⏳ 未开始 | — |
 | 12 | framework-and-observability | 框架对照（LangGraph / OpenAI Agents SDK）+ tracing/eval | ⏳ 未开始 | — |
 
@@ -123,10 +123,10 @@
 | 2026-06-30 | ✅ 完成项目 07 | short-term-memory，4种记忆策略+星际学院知识库+并排compare对比+tiktoken计数 |
 | 2026-07-02 | ✅ 完成项目 08 | long-term-memory，ChromaDB向量持久化+自定义EmbeddingAPI+跨session语义检索+3段式demo |
 | 2026-07-02 | ✅ 完成项目 09 | structured-output，json_schema强制模式+json_object弱模式+纯文本提取+Pydantic校验+重试机制 |
+| 2026-07-06 | ✅ 完成项目 10 | planning-and-goal-tree，Plan→Execute→Re-plan双层循环+DAG拓扑排序(Kahn)+局部重规划+内层ReAct执行 |
 | 待定 | 🎓 完成阶段 2 | 构建 Agent 系统架构 |
+| 待定 | 🏗️ 完成阶段 3 | 实现多 Agent 协作 |
 
 ---
 
-| 待定 | 🏗️ 完成阶段 3 | 实现多 Agent 协作 |
-
-**最后更新**：2026-07-02（完成 09-structured-output，阶段 2 进度 5/8）
+**最后更新**：2026-07-06（完成 10-planning-and-goal-tree，阶段 2 进度 6/8）
