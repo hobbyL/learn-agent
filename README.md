@@ -124,9 +124,11 @@
 | 2026-07-02 | ✅ 完成项目 08 | long-term-memory，ChromaDB向量持久化+自定义EmbeddingAPI+跨session语义检索+3段式demo |
 | 2026-07-02 | ✅ 完成项目 09 | structured-output，json_schema强制模式+json_object弱模式+纯文本提取+Pydantic校验+重试机制 |
 | 2026-07-06 | ✅ 完成项目 10 | planning-and-goal-tree，Plan→Execute→Re-plan双层循环+DAG拓扑排序(Kahn)+局部重规划+内层ReAct执行 |
-| 待定 | 🎓 完成阶段 2 | 构建 Agent 系统架构 |
+| 2026-07-09 | ✅ 完成项目 11 | hitl-agent，ReAct+HITL检查点+三层反馈(approve/reject/info)+灾害恶化机制+ScriptedHandler |
+| 2026-07-09 | ✅ 完成项目 12 | framework-and-observability，LangGraph三路ReAct对比(手写/StateGraph/prebuilt)+LangSmith集成 |
+| 2026-07-09 | 🎉 完成阶段 2 | Agent 系统设计（8个项目）全部完成 |
 | 待定 | 🏗️ 完成阶段 3 | 实现多 Agent 协作 |
 
 ---
 
-**最后更新**：2026-07-06（完成 10-planning-and-goal-tree，阶段 2 进度 6/8）
+**最后更新**：2026-07-09（完成 12-framework-and-observability，阶段 2 全部完成 8/8）
