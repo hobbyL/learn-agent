@@ -7,20 +7,20 @@
 ## 🔥 当前正在学习
 
 **状态**：阶段 2 进行中  
-**已完成**：`01-simple-agent` ✅ · `02-tool-calling` ✅ · `03-react-agent` ✅ · `04-agent-reflection` ✅ · `05-streaming-agent` ✅ · `06-streaming-react` ✅ · `07-short-term-memory` ✅ · `08-long-term-memory` ✅ · `09-structured-output` ✅ · `10-planning-and-goal-tree` ✅  
-**下一步**：`11-hitl-agent`（Human-in-the-Loop）
+**已完成**：`01-simple-agent` ✅ · `02-tool-calling` ✅ · `03-react-agent` ✅ · `04-agent-reflection` ✅ · `05-streaming-agent` ✅ · `06-streaming-react` ✅ · `07-short-term-memory` ✅ · `08-long-term-memory` ✅ · `09-structured-output` ✅ · `10-planning-and-goal-tree` ✅ · `11-hitl-agent` ✅  
+**下一步**：`12-framework-and-observability`（框架对照 + tracing）
 
 ---
 
 ## 📊 总体进度
 
-**完成项目**：10 / 18  
-**当前阶段**：阶段 2 - Agent 系统设计（6/8 项目已完成）  
+**完成项目**：11 / 18  
+**当前阶段**：阶段 2 - Agent 系统设计（7/8 项目已完成）  
 **开始时间**：2026-06-25
 
 ```
 阶段 1: Agent 核心原理        [██████████] 4/4 项目 ✅
-阶段 2: Agent 系统设计        [███████░░░] 6/8 项目
+阶段 2: Agent 系统设计        [████████░░] 7/8 项目
 阶段 3: 多 Agent 系统         [░░░░░░░░░░] 0/4 项目（含 MCP）
 阶段 4: 领域应用与优化        [待规划，阶段 1-3 后细化]
 ```
@@ -48,7 +48,7 @@
 | 08 | [long-term-memory](./projects/08-long-term-memory/) | 长期记忆：ChromaDB向量存储 + 语义检索 + 跨session记忆持久化 | ✅ 完成 | 2026-07-02 |
 | 09 | [structured-output](./projects/09-structured-output/) | 结构化输出：json_schema + Pydantic 校验 + 解析重试 + schema 设计 | ✅ 完成 | 2026-07-02 |
 | 10 | [planning-and-goal-tree](./projects/10-planning-and-goal-tree/) | 任务分解与目标树：Plan→Execute→Re-plan + DAG 拓扑排序 + 局部重规划 | ✅ 完成 | 2026-07-06 |
-| 11 | hitl-agent | Human-in-the-Loop：主动中断 + 人类反馈 + 恢复执行 | ⏳ 未开始 | — |
+| 11 | [hitl-agent](./projects/11-hitl-agent/) | Human-in-the-Loop：ReAct + HITL 检查点 + 三层反馈（approve/reject/info）+ 灾害恶化 | ✅ 完成 | 2026-07-09 |
 | 12 | framework-and-observability | 框架对照（LangGraph / OpenAI Agents SDK）+ tracing/eval | ⏳ 未开始 | — |
 
 ### 阶段 3：多 Agent 系统（3-4周）
