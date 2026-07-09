@@ -1,0 +1,6 @@
+{"file": ".trellis/tasks/07-02-09/prd.md", "reason": "完整需求：3种输出模式、4层提取任务、重试机制、对比矩阵、游戏工作室知识库"}
+{"file": "projects/07-short-term-memory/knowledge_base.py", "reason": "知识库设计参考：实体结构、search/lookup 接口模式"}
+{"file": "projects/07-short-term-memory/main.py", "reason": "CLI 模式设计参考：--compare/--demo/--interactive 模式分发"}
+{"file": "projects/07-short-term-memory/tools.py", "reason": "工具函数+TOOLS_SCHEMA 定义参考：工具注册模式"}
+{"file": "projects/08-long-term-memory/agent.py", "reason": "Agent 循环参考：Function Calling loop + 错误处理模式"}
+{"file": "projects/06-streaming-react/display.py", "reason": "display 模块参考：ANSI 着色风格约定"}

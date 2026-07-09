@@ -1,0 +1,5 @@
+{"file": "notes/react-pattern.md", "reason": "ReAct 模式的实战经验和教训，04 内层 ReAct 循环需遵循这些模式"}
+{"file": "notes/agent-basics.md", "reason": "Agent 基础概念，确保反思层设计与已有认知一致"}
+{"file": "projects/03-react-agent/react_agent.py", "reason": "03 的 ReAct 实现作为参考，04 重写轻量版时对照"}
+{"file": "projects/03-react-agent/knowledge_base.py", "reason": "03 知识库结构作为参考，04 新建知识库时对照数据格式"}
+{"file": "projects/03-react-agent/tools.py", "reason": "03 工具层实现参考，04 工具层保持类似接口"}

@@ -1,0 +1,4 @@
+{"file": ".trellis/tasks/06-27-03-react-agent-react-agent/prd.md", "reason": "Project requirements, architecture decisions, tool design, and acceptance criteria"}
+{"file": "projects/02-tool-calling/registry.py", "reason": "Reference for decorator pattern and tool registration — 03 shares similar structure"}
+{"file": "projects/02-tool-calling/agent.py", "reason": "Reference for Agent loop pattern — 03 builds a different loop but same API interaction style"}
+{"file": "projects/02-tool-calling/notes.md", "reason": "Lessons learned from 02 that inform 03 design (prompt as lever, schema as protocol)"}

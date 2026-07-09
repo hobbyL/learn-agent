@@ -1,0 +1,5 @@
+{"file": ".trellis/tasks/06-30-07-short-term-memory-agent/prd.md", "reason": "完整需求：4种记忆策略、MemoryManager抽象基类、星际学院知识库、--compare并排模式"}
+{"file": "projects/05-streaming-agent/knowledge_base.py", "reason": "知识库结构参考：实体设计模式、search/lookup接口约定"}
+{"file": "projects/03-react-agent/tools.py", "reason": "工具设计参考：search/lookup/calculate/compare 4个工具实现模式"}
+{"file": "projects/06-streaming-react/display.py", "reason": "display模块参考：ANSI着色、并排展示约定"}
+{"file": "projects/01-simple-agent/agent.py", "reason": "Agent核心循环参考：messages管理、Function Calling调用模式"}

@@ -1,0 +1,2 @@
+{"file": ".trellis/tasks/06-30-07-short-term-memory-agent/prd.md", "reason": "验收标准：4策略独立运行、--compare并排展示、第6+轮sliding答错summary答对、token计数、优雅降级"}
+{"file": "projects/06-streaming-react/notes.md", "reason": "踩坑记录格式参考：notes.md结构约定"}

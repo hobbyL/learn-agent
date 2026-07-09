@@ -1,0 +1,9 @@
+{"file": ".trellis/tasks/07-07-11-hitl-agent/prd.md", "reason": "PRD with full requirements, design decisions, acceptance criteria, and file structure"}
+{"file": ".trellis/spec/backend/error-handling.md", "reason": "Error handling patterns relevant to HITL reject/retry flows"}
+{"file": ".trellis/spec/backend/quality-guidelines.md", "reason": "Code quality standards for implementation"}
+{"file": ".trellis/spec/guides/code-reuse-thinking-guide.md", "reason": "Guide for reusing patterns from prior projects (03-react, 09-structured-output)"}
+{"file": "projects/03-react-agent/agent.py", "reason": "Reference ReAct loop implementation — 11 builds HITL on top of this pattern"}
+{"file": "projects/10-planning-and-goal-tree/executor.py", "reason": "Reference inner ReAct executor with report_result tool — pattern to adapt for HITL checkpoints"}
+{"file": "projects/10-planning-and-goal-tree/display.py", "reason": "Reference ANSI display module — 11 display follows same patterns"}
+{"file": "projects/09-structured-output/schemas.py", "reason": "Reference schema design with get_json_schema() + _enforce_strict_schema() for reuse"}
+{"file": "notes/planning-and-goal-tree.md", "reason": "Architecture context for how prior projects structure dual-layer loops"}

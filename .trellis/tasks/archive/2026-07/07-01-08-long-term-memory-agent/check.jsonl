@@ -1,0 +1,2 @@
+{"file": ".trellis/tasks/07-01-08-long-term-memory-agent/prd.md", "reason": "验收标准：ChromaDB持久化、Session2引用Session1记忆、相似度过滤、优雅处理空collection"}
+{"file": "projects/07-short-term-memory/notes.md", "reason": "踩坑记录格式参考：notes.md结构约定"}

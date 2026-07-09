@@ -1,0 +1,7 @@
+{"file": ".trellis/tasks/07-06-10-planning-and-goal-tree-agent/prd.md", "reason": "完整需求：太空基地场景、混合规划模式、DAG目标树、LLM驱动执行、局部重规划、--demo/--interactive"}
+{"file": "projects/09-structured-output/schemas.py", "reason": "复用 get_json_schema() 和 _enforce_strict_schema() 生成 OpenAI strict 模式 schema，用于结构化计划输出"}
+{"file": "projects/04-agent-reflection/reflexion_agent.py", "reason": "外层循环模式参考：规划循环与 reflexion 的 try→evaluate→retry 结构类似，可借鉴 re-planning 循环设计"}
+{"file": "projects/03-react-agent/react_agent.py", "reason": "内层 ReAct 循环参考：每个子任务由 LLM 通过 ReAct 推理+Function Calling 执行"}
+{"file": "projects/03-react-agent/tools.py", "reason": "工具注册模式 + TOOLS_SCHEMA 定义参考：采集/建造/运输/环境检查等太空基地工具"}
+{"file": "projects/07-short-term-memory/main.py", "reason": "CLI 模式分发参考：--demo/--interactive 结构"}
+{"file": "projects/06-streaming-react/display.py", "reason": "ANSI 着色风格约定参考：目标树可视化、状态着色"}

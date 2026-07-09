@@ -1,0 +1,6 @@
+{"file": ".trellis/tasks/07-01-08-long-term-memory-agent/prd.md", "reason": "完整需求：ChromaDB向量存储、自定义embedding端点、模拟多session演示、相似度阈值检索"}
+{"file": "projects/07-short-term-memory/memory_manager.py", "reason": "MemoryManager抽象基类参考：接口设计、_history管理、token计数模式"}
+{"file": "projects/07-short-term-memory/knowledge_base.py", "reason": "星际学院知识库：直接复用，22实体6层关系链"}
+{"file": "projects/07-short-term-memory/tools.py", "reason": "工具函数：直接复用search/lookup/calculate/compare + TOOLS_SCHEMA"}
+{"file": "projects/07-short-term-memory/agent.py", "reason": "MemoryAgent参考：Function Calling循环、ask()接口、context_length_exceeded处理"}
+{"file": "projects/06-streaming-react/display.py", "reason": "display模块参考：ANSI着色风格约定"}
