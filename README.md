@@ -8,20 +8,20 @@
 
 **状态**：阶段 2 完成 ✅  
 **已完成**：`01-simple-agent` ✅ · `02-tool-calling` ✅ · `03-react-agent` ✅ · `04-agent-reflection` ✅ · `05-streaming-agent` ✅ · `06-streaming-react` ✅ · `07-short-term-memory` ✅ · `08-long-term-memory` ✅ · `09-structured-output` ✅ · `10-planning-and-goal-tree` ✅ · `11-hitl-agent` ✅ · `12-framework-and-observability` ✅  
-**下一步**：阶段 3 `13-mcp-tool-discovery`
+**下一步**：阶段 3 `13-observability`
 
 ---
 
 ## 📊 总体进度
 
-**完成项目**：12 / 18  
+**完成项目**：12 / 19  
 **当前阶段**：阶段 2 - Agent 系统设计（8/8 项目已完成）✅  
 **开始时间**：2026-06-25
 
 ```
 阶段 1: Agent 核心原理        [██████████] 4/4 项目 ✅
 阶段 2: Agent 系统设计        [██████████] 8/8 项目 ✅
-阶段 3: 多 Agent 系统         [░░░░░░░░░░] 0/4 项目（含 MCP）
+阶段 3: 多 Agent 系统         [░░░░░░░░░░] 0/5 项目（含 MCP + Observability）
 阶段 4: 领域应用与优化        [待规划，阶段 1-3 后细化]
 ```
 
@@ -55,10 +55,11 @@
 
 | 编号 | 项目名称 | 描述 | 状态 | 完成时间 |
 |------|---------|------|------|---------|
-| 13 | mcp-tool-discovery | MCP 动态工具发现：运行时工具绑定 vs 静态注册表 | ⏳ 未开始 | — |
-| 14 | multi-agent-debate | 辩论模式：多 Agent 投票决策 | ⏳ 未开始 | — |
-| 15 | code-review-team | 代码审查团队（分工协作） | ⏳ 未开始 | — |
-| 16 | workflow-orchestration | 工作流编排引擎 | ⏳ 未开始 | — |
+| 13 | observability | Agent 可观测性：LangSmith tracing + eval + 自定义 tracer | ⏳ 未开始 | — |
+| 14 | mcp-tool-discovery | MCP 动态工具发现：运行时工具绑定 vs 静态注册表 | ⏳ 未开始 | — |
+| 15 | multi-agent-debate | 辩论模式：多 Agent 投票决策 | ⏳ 未开始 | — |
+| 16 | code-review-team | 代码审查团队（分工协作） | ⏳ 未开始 | — |
+| 17 | workflow-orchestration | 工作流编排引擎 | ⏳ 未开始 | — |
 
 ### 阶段 4：领域应用与优化
 
@@ -82,10 +83,10 @@
 - ~~**结构化输出 & 可靠解析**~~ → ✅ 独立为 09-structured-output
 - ~~**任务分解与目标树**~~ → ✅ 独立为 10-planning-and-goal-tree
 - ~~**流式输出 (streaming)**~~ → ✅ 独立为 05-streaming-agent（FC stream）+ 06-streaming-react（流式 ReAct）
-- ~~**MCP 动态工具发现**~~ → ✅ 落地为 13-mcp-tool-discovery（阶段 3 开篇）
-- ~~**框架对照节点**~~ → ✅ 落地为 12-framework-and-observability（含 tracing/eval）
+- ~~**MCP 动态工具发现**~~ → ✅ 落地为 14-mcp-tool-discovery（阶段 3）
+- ~~**框架对照节点**~~ → ✅ 拆分为 12-framework-and-observability（框架对照）+ 13-observability（tracing/eval）
 
-> 原则：阶段 2 规划已锁定（8个项目，含 streaming 拆分 + structured-output/planning 拆分），阶段 3 已调整（4个项目含MCP，编号13-16）。
+> 原则：阶段 2 规划已锁定（8个项目，含 streaming 拆分 + structured-output/planning 拆分），阶段 3 已调整（5个项目含MCP+Observability，编号13-17）。
 
 ---
 
