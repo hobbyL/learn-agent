@@ -6,21 +6,21 @@
 
 ## 🔥 当前正在学习
 
-**状态**：阶段 2 进行中  
-**已完成**：`01-simple-agent` ✅ · `02-tool-calling` ✅ · `03-react-agent` ✅ · `04-agent-reflection` ✅ · `05-streaming-agent` ✅ · `06-streaming-react` ✅ · `07-short-term-memory` ✅ · `08-long-term-memory` ✅ · `09-structured-output` ✅ · `10-planning-and-goal-tree` ✅ · `11-hitl-agent` ✅ · `12-framework-and-observability` ✅  
-**下一步**：`13-observability`（Agent 可观测性：tracing + eval）
+**状态**：阶段 2 完成 ✅  
+**已完成**：`01-simple-agent` ✅ · `02-tool-calling` ✅ · `03-react-agent` ✅ · `04-agent-reflection` ✅ · `05-streaming-agent` ✅ · `06-streaming-react` ✅ · `07-short-term-memory` ✅ · `08-long-term-memory` ✅ · `09-structured-output` ✅ · `10-planning-and-goal-tree` ✅ · `11-hitl-agent` ✅ · `12-framework-and-observability` ✅ · `13-observability` ✅  
+**下一步**：`14-mcp-tool-discovery`（MCP 动态工具发现，阶段 3 开始）
 
 ---
 
 ## 📊 总体进度
 
-**完成项目**：12 / 19  
-**当前阶段**：阶段 2 - Agent 系统设计（8/9 项目已完成）  
+**完成项目**：13 / 19  
+**当前阶段**：阶段 2 - Agent 系统设计（9/9 项目已完成 ✅）  
 **开始时间**：2026-06-25
 
 ```
 阶段 1: Agent 核心原理        [██████████] 4/4 项目 ✅
-阶段 2: Agent 系统设计        [████████░░] 8/9 项目
+阶段 2: Agent 系统设计        [██████████] 9/9 项目 ✅
 阶段 3: 多 Agent 系统         [░░░░░░░░░░] 0/4 项目（含 MCP）
 阶段 4: 领域应用与优化        [待规划，阶段 1-3 后细化]
 ```
@@ -50,7 +50,7 @@
 | 10 | [planning-and-goal-tree](./projects/10-planning-and-goal-tree/) | 任务分解与目标树：Plan→Execute→Re-plan + DAG 拓扑排序 + 局部重规划 | ✅ 完成 | 2026-07-06 |
 | 11 | [hitl-agent](./projects/11-hitl-agent/) | Human-in-the-Loop：ReAct + HITL 检查点 + 三层反馈（approve/reject/info）+ 灾害恶化 | ✅ 完成 | 2026-07-09 |
 | 12 | [framework-and-observability](./projects/12-framework-and-observability/) | 框架对照（LangGraph 三路 ReAct）+ LangSmith tracing | ✅ 完成 | 2026-07-09 |
-| 13 | observability | Agent 可观测性：LangSmith tracing + eval + 自定义 tracer | ⏳ 未开始 | — |
+| 13 | [observability](./projects/13-observability/) | Agent 可观测性：LangSmith tracing + eval + 自定义 tracer | ✅ 完成 | 2026-07-10 |
 
 ### 阶段 3：多 Agent 系统（3-4周）
 
@@ -127,9 +127,10 @@
 | 2026-07-06 | ✅ 完成项目 10 | planning-and-goal-tree，Plan→Execute→Re-plan双层循环+DAG拓扑排序(Kahn)+局部重规划+内层ReAct执行 |
 | 2026-07-09 | ✅ 完成项目 11 | hitl-agent，ReAct+HITL检查点+三层反馈(approve/reject/info)+灾害恶化机制+ScriptedHandler |
 | 2026-07-09 | ✅ 完成项目 12 | framework-and-observability，LangGraph三路ReAct对比(手写/StateGraph/prebuilt)+LangSmith集成 |
-| 待定 | 🎓 完成阶段 2 | Agent 系统设计（9个项目）全部完成 |
+| 2026-07-10 | ✅ 完成项目 13 | observability，三层可观测性(tracing+eval+自定义tracer)+双Agent对比+LangSmith可选降级 |
+| 2026-07-10 | 🎉 完成阶段 2 | Agent 系统设计（9个项目）全部完成 |
 | 待定 | 🏗️ 完成阶段 3 | 实现多 Agent 协作 |
 
 ---
 
-**最后更新**：2026-07-10（修正阶段归属：13-observability 属阶段 2，阶段 2 进度 8/9）
+**最后更新**：2026-07-10（13-observability 完成，阶段 2 全部 9/9 完成 ✅）
