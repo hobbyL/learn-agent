@@ -1,0 +1,2 @@
+{"file": ".trellis/tasks/07-09-12-framework-and-observability/prd.md", "reason": "验收标准和 Definition of Done，check 时对照此文件逐条核查"}
+{"file": ".trellis/tasks/07-09-12-framework-and-observability/research/langgraph-overview.md", "reason": "LangGraph 行为参考：interrupt() 重跑规则、ToolNode 自动处理、InMemorySaver thread_id 用法"}

@@ -1,0 +1,5 @@
+{"file": ".trellis/tasks/07-09-12-framework-and-observability/prd.md", "reason": "完整需求：三路实现规格、文件结构、依赖版本、对比表格、决策说明"}
+{"file": ".trellis/tasks/07-09-12-framework-and-observability/research/langgraph-overview.md", "reason": "LangGraph 核心原语代码示例：StateGraph / ToolNode / interrupt() / ChatOpenAI 自定义端点 / LangSmith 配置"}
+{"file": "projects/03-react-agent/react_agent.py", "reason": "v1 直接复用的源文件，了解纯文本 ReAct 实现结构（system prompt / 正则解析 / 循环逻辑）"}
+{"file": "projects/03-react-agent/tools.py", "reason": "原始工具定义（execute_tool / TOOLS_SCHEMA），需要适配为 LangChain @tool 格式"}
+{"file": "projects/03-react-agent/knowledge_base.py", "reason": "星云大陆知识库，原封不动复制到项目 12"}
