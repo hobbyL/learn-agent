@@ -7,21 +7,21 @@
 ## 🔥 当前正在学习
 
 **状态**：阶段 3 进行中  
-**已完成**：`01-simple-agent` ✅ · `02-tool-calling` ✅ · `03-react-agent` ✅ · `04-agent-reflection` ✅ · `05-streaming-agent` ✅ · `06-streaming-react` ✅ · `07-short-term-memory` ✅ · `08-long-term-memory` ✅ · `09-structured-output` ✅ · `10-planning-and-goal-tree` ✅ · `11-hitl-agent` ✅ · `12-framework-and-observability` ✅ · `13-observability` ✅ · `14-mcp-tool-discovery` ✅  
-**下一步**：`15-multi-agent-debate`（辩论模式：多 Agent 投票决策）
+**已完成**：`01-simple-agent` ✅ · `02-tool-calling` ✅ · `03-react-agent` ✅ · `04-agent-reflection` ✅ · `05-streaming-agent` ✅ · `06-streaming-react` ✅ · `07-short-term-memory` ✅ · `08-long-term-memory` ✅ · `09-structured-output` ✅ · `10-planning-and-goal-tree` ✅ · `11-hitl-agent` ✅ · `12-framework-and-observability` ✅ · `13-observability` ✅ · `14-mcp-tool-discovery` ✅ · `15-multi-agent-debate` ✅  
+**下一步**：`16-code-review-team`（代码审查团队：分工协作）
 
 ---
 
 ## 📊 总体进度
 
-**完成项目**：14 / 19  
-**当前阶段**：阶段 3 - 多 Agent 系统（1/4 项目已完成）  
+**完成项目**：15 / 19  
+**当前阶段**：阶段 3 - 多 Agent 系统（2/4 项目已完成）  
 **开始时间**：2026-06-25
 
 ```
 阶段 1: Agent 核心原理        [██████████] 4/4 项目 ✅
 阶段 2: Agent 系统设计        [██████████] 9/9 项目 ✅
-阶段 3: 多 Agent 系统         [██▌░░░░░░░] 1/4 项目（含 MCP）
+阶段 3: 多 Agent 系统         [█████░░░░░] 2/4 项目（含 MCP）
 阶段 4: 领域应用与优化        [待规划，阶段 1-3 后细化]
 ```
 
@@ -57,7 +57,7 @@
 | 编号 | 项目名称 | 描述 | 状态 | 完成时间 |
 |------|---------|------|------|---------|
 | 14 | [mcp-tool-discovery](./projects/14-mcp-tool-discovery/) | MCP 动态工具发现：三阶段对比（静态/MCP动态/热加载）+ 多Server聚合 | ✅ 完成 | 2026-07-11 |
-| 15 | multi-agent-debate | 辩论模式：多 Agent 投票决策 | ⏳ 未开始 | — |
+| 15 | [multi-agent-debate](./projects/15-multi-agent-debate/) | 辩论模式：多 Agent 投票决策（三阶段辩论 + 工具查证 + 立场追踪） | ✅ 完成 | 2026-07-11 |
 | 16 | code-review-team | 代码审查团队（分工协作） | ⏳ 未开始 | — |
 | 17 | workflow-orchestration | 工作流编排引擎 | ⏳ 未开始 | — |
 
@@ -130,8 +130,9 @@
 | 2026-07-10 | ✅ 完成项目 13 | observability，三层可观测性(tracing+eval+自定义tracer)+双Agent对比+LangSmith可选降级 |
 | 2026-07-10 | 🎉 完成阶段 2 | Agent 系统设计（9个项目）全部完成 |
 | 2026-07-11 | ✅ 完成项目 14 | mcp-tool-discovery，MCP三阶段对比(静态/动态/热加载)+多Server聚合+AsyncExitStack生命周期 |
+| 2026-07-11 | ✅ 完成项目 15 | multi-agent-debate，三阶段辩论(独立立论/交叉质疑/投票)+工具查证+立场变化追踪 |
 | 待定 | 🏗️ 完成阶段 3 | 实现多 Agent 协作 |
 
 ---
 
-**最后更新**：2026-07-11（14-mcp-tool-discovery 完成，阶段 3 进行中 1/4）
+**最后更新**：2026-07-11（15-multi-agent-debate 完成，阶段 3 进行中 2/4）
