@@ -8,7 +8,7 @@
 
 <!-- @@@auto:current-status -->
 - **Active File**: `journal-1.md`
-- **Total Sessions**: 20
+- **Total Sessions**: 21
 - **Last Active**: 2026-07-11
 <!-- @@@/auto:current-status -->
 
@@ -19,7 +19,7 @@
 <!-- @@@auto:active-documents -->
 | File | Lines | Status |
 |------|-------|--------|
-| `journal-1.md` | ~673 | Active |
+| `journal-1.md` | ~706 | Active |
 <!-- @@@/auto:active-documents -->
 
 ---
@@ -29,6 +29,7 @@
 <!-- @@@auto:session-history -->
 | # | Date | Title | Commits | Branch |
 |---|------|-------|---------|--------|
+| 21 | 2026-07-11 | 实现 15-multi-agent-debate | `871e216` | `main` |
 | 20 | 2026-07-11 | 实现 14-mcp-tool-discovery：MCP 动态工具发现 + 三阶段 demo + 多 Server 聚合 | `50768bf` | `main` |
 | 19 | 2026-07-10 | 实现 13-observability：三层可观测性 + 双 Agent 对比 + LangSmith 可选降级 | `3cb07ce`, `d2f8a43` | `main` |
 | 18 | 2026-07-10 | 实现 12-framework-and-observability：LangGraph 三路 ReAct 对比 + LangSmith 集成 | `c2268f6`, `e5f86fd`, `81ec9d9` | `main` |

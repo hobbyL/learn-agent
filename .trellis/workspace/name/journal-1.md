@@ -671,3 +671,36 @@ MCP 动态工具发现：3 个 MCP Server（FastMCP+@mcp.tool+stdio）+ MCPClien
 ### Next Steps
 
 - None - task complete
+
+
+## Session 21: 实现 15-multi-agent-debate
+
+**Date**: 2026-07-11
+**Task**: 实现 15-multi-agent-debate
+**Branch**: `main`
+
+### Summary
+
+实现多 Agent 辩论项目：三阶段结构化辩论（独立立论→交叉质疑→总结投票），3 个独立角色（科学官/军事官/经济官），共享+专属工具混合，信息隔离与注入，投票解析三级降级，立场变化追踪，API 重试机制。端到端验证通过：科学官从翡翠星改投蓝晶星，全票通过。
+
+### Main Changes
+
+- Detailed change bullets were not supplied; see the summary above.
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `871e216` | (see git log) |
+
+### Testing
+
+- Validation was not recorded for this session.
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
