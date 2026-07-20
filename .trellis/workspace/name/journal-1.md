@@ -704,3 +704,37 @@ MCP 动态工具发现：3 个 MCP Server（FastMCP+@mcp.tool+stdio）+ MCPClien
 ### Next Steps
 
 - None - task complete
+
+
+## Session 22: 完成项目 16 code-review-team
+
+**Date**: 2026-07-20
+**Task**: 完成项目 16 code-review-team
+**Branch**: `main`
+
+### Summary
+
+实现代码审查团队项目：4 个专业审查员（安全/性能/架构/规范）并行审查 + 主审规则汇总。结构化输出（Pydantic）+ 去重排序 + 召回率统计。Demo 验证通过：14 个问题去重，5 P0 + 7 P1 + 2 P2，安全维度召回率 140%。修复 JSON 前缀清理和主审 API 超时问题（改为规则汇总）。文档完整（README + notes + 根目录知识笔记）。
+
+### Main Changes
+
+- Detailed change bullets were not supplied; see the summary above.
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `d467c9b` | (see git log) |
+| `79711e7` | (see git log) |
+
+### Testing
+
+- Validation was not recorded for this session.
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
