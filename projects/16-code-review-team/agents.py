@@ -215,42 +215,60 @@ def review_code(code: str, file_name: str, reviewer: dict, client: OpenAI, model
 
 def lead_review(reviewer_results: list[ReviewResult], client: OpenAI, model: str) -> str:
     """
-    主审汇总所有审查员的结果。
+    主审汇总所有审查员的结果（规则汇总，不调用 LLM，避免 API 超时）。
 
     Args:
         reviewer_results: 4 个审查员的结果
-        client: OpenAI client
-        model: 模型名称
+        client: OpenAI client (未使用，保留接口兼容)
+        model: 模型名称 (未使用，保留接口兼容)
 
     Returns:
         最终报告（自然语言）
     """
-    # 将审查员结果格式化为文本
-    reviews_text = "\n\n".join([
-        f"=== {result.reviewer} ===\n"
-        f"发现 {len(result.findings)} 个问题\n"
-        f"通过审查：{'是' if result.pass_review else '否'}\n"
-        f"总结：{result.summary}\n\n"
-        f"问题列表：\n" +
-        "\n".join([
-            f"- [{f.severity}] {f.file}:{f.line} - {f.description}"
-            for f in result.findings
-        ])
-        for result in reviewer_results
-    ])
+    # 收集所有 findings 并去重（按 file:line 去重）
+    all_findings = []
+    seen = set()
+    for result in reviewer_results:
+        for f in result.findings:
+            key = f"{f.file}:{f.line}"
+            if key not in seen:
+                seen.add(key)
+                all_findings.append((result.reviewer, f))
 
-    messages = [
-        {"role": "system", "content": LEAD_REVIEWER["system_prompt"]},
-        {"role": "user", "content": f"""以下是 4 位审查员的审查结果：
+    # 按严重级别排序（P0 > P1 > P2）
+    severity_order = {"P0": 0, "P1": 1, "P2": 2}
+    all_findings.sort(key=lambda x: severity_order.get(x[1].severity, 3))
 
-{reviews_text}
+    # 统计
+    p0_count = sum(1 for _, f in all_findings if f.severity == "P0")
+    p1_count = sum(1 for _, f in all_findings if f.severity == "P1")
+    p2_count = sum(1 for _, f in all_findings if f.severity == "P2")
+    total = len(all_findings)
 
-请汇总以上结果，去重后输出最终报告。"""}
+    # 生成报告
+    report_lines = [
+        "=== 代码审查最终报告 ===",
+        "",
+        "【概览】",
+        f"4 位审查员共发现 {sum(len(r.findings) for r in reviewer_results)} 个问题，去重后剩余 {total} 个：",
+        f"- P0 致命：{p0_count} 个",
+        f"- P1 严重：{p1_count} 个",
+        f"- P2 建议：{p2_count} 个",
+        "",
+        "【高优先级问题（P0 + P1）】"
     ]
 
-    response = client.chat.completions.create(
-        model=model,
-        messages=messages
-    )
+    # 只列出 P0 和 P1
+    high_priority = [(reviewer, f) for reviewer, f in all_findings if f.severity in ["P0", "P1"]]
+    for i, (reviewer, f) in enumerate(high_priority, 1):
+        report_lines.append(f"{i}. [{f.severity}] {f.file}:{f.line} - {f.description[:60]}... ({reviewer})")
 
-    return response.choices[0].message.content
+    report_lines.extend([
+        "",
+        "【建议】",
+        f"发现 {p0_count} 个 P0 致命问题，建议立即修复后再发布。" if p0_count > 0 else "未发现 P0 致命问题。",
+        f"建议优先处理 {p1_count} 个 P1 严重问题。" if p1_count > 0 else "",
+        f"有 {p2_count} 个 P2 改进建议，可根据时间安排处理。" if p2_count > 0 else ""
+    ])
+
+    return "\n".join(line for line in report_lines if line)  # 过滤空行
